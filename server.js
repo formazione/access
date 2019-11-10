@@ -10,9 +10,12 @@ var app = express();
 
 var userName1 = process.env.USERNAME1;
 var userPass1 = process.env.PASSWORD1;
+
 var userName2 = process.env.USERNAME2;
 var userPass2 = process.env.PASSWORD2;
 
+var userName3 = process.env.USERNAME3;
+var userPass3 = process.env.PASSWORD3;
 
 var basicAuth = require("basic-auth");
 let name = "";
@@ -21,15 +24,17 @@ app.use(function(request, response, next) {
   console.log(user);
   
   
-  if (!user || user.name !== userName1 || user.pass !== userPass1) {
-    response.set("WWW-Authenticate", 'Basic realm="example"');
-    return response.status(401).send();
-  }
+  if (!user  || ((user.name !== userName1 || user.pass !== userPass1) 
+             && (user.name !== userName2 || user.pass !== userPass2)
+             && (user.name !== userName3 || user.pass !== userPass3)
+     
+     )
+            {
+              response.set("WWW-Authenticate", 'Basic realm="example"');
+              return response.status(401).send();
+            }
   
-  else if (!user || user.name !== userName2 || user.pass !== userPass2) {
-    response.set("WWW-Authenticate", 'Basic realm="example"');
-    return response.status(401).send();
-  }
+
 
   name = user.name;
   
