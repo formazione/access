@@ -26,7 +26,7 @@ app.use(function(request, response, next) {
   
   if (!user  || ((user.name !== userName1 || user.pass !== userPass1) 
              && (user.name !== userName2 || user.pass !== userPass2)
-             && (user.name !== userName3 || user.pass !== userPass3)
+             && (user.name !== userName3 || user.pass !== userPass3))
      
      )
             {
@@ -47,10 +47,9 @@ app.use(express.static("public"));
 // http://expressjs.com/en/starter/basic-routing.html
 // DIFFERENT PAGES FOR EACH NAME
 
-  app.get("/", function(request, response) {
+app.get("/", function(request, response) {
     response.sendFile(__dirname + "/views/"+name+".html");
   });
-
 
 
 
