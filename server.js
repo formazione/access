@@ -8,15 +8,15 @@ var app = express();
 // we've started you off with Express, 
 // but feel free to use whatever libs or frameworks you'd like through `package.json`.
 
-// Only allow people who know the password set in .env to access the site
-var userName = "guest";
+var userName = "duder";
 var userPass = process.env.PASSWORD;
 
 var basicAuth = require('basic-auth');
 app.use(function (request, response, next) {
   var user = basicAuth(request);
+  console.log(user);
   if (!user || user.name !== userName || user.pass !== userPass) {
-    response.set('WWW-Authenticate', 'Basic realm="site"');
+    response.set('WWW-Authenticate', 'Basic realm="example"');
     return response.status(401).send();
   }
   return next();
