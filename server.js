@@ -13,6 +13,7 @@ var userName = "guest";
 var userPass = process.env.PASSWORD;
 
 var basicAuth = require('basic-auth');
+
 app.use(function (request, response, next) {
   var user = basicAuth(request);
   if (!user || user.name !== userName || user.pass !== userPass) {
