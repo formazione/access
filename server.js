@@ -15,9 +15,9 @@ var userPass2 = process.env.PASSWORD2;
 
 
 var basicAuth = require("basic-auth");
-let user = None;
+let name = "";
 app.use(function(request, response, next) {
-  user = basicAuth(request);
+  let user = basicAuth(request);
   console.log(user);
   
   
@@ -26,7 +26,12 @@ app.use(function(request, response, next) {
     return response.status(401).send();
   }
   
+  else if (!user || user.name !== userName2 || user.pass !== userPass2) {
+    response.set("WWW-Authenticate", 'Basic realm="example"');
+    return response.status(401).send();
+  }
 
+  name = user.name;
   
   return next();
 });
@@ -36,11 +41,11 @@ app.use(express.static("public"));
 
 // http://expressjs.com/en/starter/basic-routing.html
 // DIFFERENT PAGES FOR EACH NAME
-if (user.name == "john"){
+
   app.get("/", function(request, response) {
-    response.sendFile(__dirname + "/views/john.html");
+    response.sendFile(__dirname + "/views/"+name+".html");
   });
-}
+
 
 
 
