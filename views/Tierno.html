@@ -1,0 +1,88 @@
+<!-- This is a static file -->
+<!-- served from your routes in server.js -->
+
+<!-- You might want to try something fancier: -->
+<!-- html/nunjucks docs: https://mozilla.github.io/nunjucks/ -->
+<!-- pug: https://pugjs.org/ -->
+<!-- haml: http://haml.info/ -->
+<!-- hbs(handlebars): http://handlebarsjs.com/ -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Ciao sono John</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+  </head>
+  <body>
+
+    <center>
+    <table>
+      <td>
+        <center>
+    <h1 id="name">Tierno</h1>
+    <img src="https://formazione.github.io/Programmi20192020/text_4ce/Tierno.PNG" width="300">
+        </center>
+    <h2>
+    L'alunna ha un totale di punti pari a...
+    </h2>
+      <br>
+      </td>
+      <tr>
+        <td>
+    <h1>
+      
+    <div id="scoretot"></div>
+    </h1>
+        </td>
+      </tr>
+    </table>
+    </center>
+
+      
+    
+
+<script src="https://www.gstatic.com/firebasejs/5.9.2/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDp-mWaWEI07pIdRUhi6vA-salEMRWz4hw",
+    authDomain: "quiz-e5e5a.firebaseapp.com",
+    databaseURL: "https://quiz-e5e5a.firebaseio.com",
+    projectId: "quiz-e5e5a",
+    storageBucket: "quiz-e5e5a.appspot.com",
+    messagingSenderId: "901845403492"
+  };
+  firebase.initializeApp(config);
+  let database = firebase.database();
+  let ref = database.ref("4CE");
+  ref.on("value", gotData)
+  
+  
+  let scoretot = document.getElementById("scoretot");
+scoretot.align = "center";
+function gotData(data){
+    x = data.val();
+  scoretot.innerHTML = x["Tierno"];
+}
+</script>
+  
+    <p>
+      Voto scritto : 9
+    </p>
+    <p>
+      Voto orale: 8
+    </p>
+    <p>
+      
+      Comportamento: attenta in classe durante le spiegazioni; corretta con i compagni e con gli alunni.
+    </p>
+
+  </body>
+</html>
